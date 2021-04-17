@@ -47,6 +47,16 @@ public class WelcomeRest {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @PostMapping(value = "/devuelveEjemplo02Post", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Ejemplo> devuelveEjemploPost02(
+            @RequestBody Ejemplo ejemplo) {
+        ejemplo.setApellidos(ejemplo.getApellidos() + " FINAL 02");
+        ejemplo.setApellidosNombres(ejemplo.getApellidos() + ", " + ejemplo.getNombres());
+        ejemplo.setRuc("1111111");
+        return Optional.ofNullable(ejemplo).map(bean -> new ResponseEntity<>(bean, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
     @GetMapping(value = "/devuelveFechaActual", produces = APPLICATION_JSON_VALUE)
     public String devuelveFechaActual() {
